@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galaxy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      width: 100%;
+      overflow-x: hidden;
+      background: linear-gradient(to bottom, #8e2de2, #4a00e0); /* Purple to black gradient */
+      color: #ffffff; /* White text color */
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      animation: moveStars 50s linear infinite;
+    }
+
+    .star::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+
+    @keyframes moveStars {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(1000px);
+      }
+    }
+
+    @keyframes spinAndTilt {
+      0% {
+        transform: perspective(500px) rotateY(0deg) rotateX(0deg);
+      }
+      50% {
+        transform: perspective(500px) rotateY(10deg) rotateX(5deg);
+      }
+      100% {
+        transform: perspective(500px) rotateY(0deg) rotateX(0deg);
+      }
+    }
+
+    .spacing {
+      --nav-main-spacing: -3rem;
+      --main-faq-spacing: 3rem;
+      --faq-features-spacing: 3rem;
+    }
+
+    .main-content {
+      margin-top: var(--nav-main-spacing);
+      animation: fadeIn 1s ease-out;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80vh;
+      gap: 2rem;
+    }
+
+    .faq-section {
+      margin-top: var(--main-faq-spacing);
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    .features-section {
+      margin-top: var(--faq-features-spacing);
+      animation: fadeIn 2s ease-out;
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-in-out;
+      color: #ffffff; /* White text color */
+    }
+
+    .faq-content.open {
+      max-height: 500px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #2d2d2d;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #5a189a;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #7b2cbf;
+    }
+
+    .card {
+      background-color: #1a1a1a;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      background-color: #333333;
+    }
+
+    .faq-button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-button .emoji {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-button .emoji.open {
+      transform: rotate(180deg);
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+    }
+
+    .image-container img {
+      width: 100%;
+      max-width: 516px;
+      border-radius: 15px;
+      transition: transform 0.5s ease;
+      transform-style: preserve-3d;
+      perspective: 500px;
+    }
+
+    .image-container img:hover {
+      animation: spinAndTilt 2s ease-in-out forwards;
+    }
+
+    .nav-button {
+      background-color: #333333;
+      color: #ffffff; /* White text color */
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background-color: #444444;
+    }
+
+    .main-button {
+      background-color: #444444;
+      color: #ffffff; /* White text color */
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .main-button:hover {
+      background-color: #555555;
+    }
+
+    .icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      margin-right: 16px;
+    }
+
+    .icon-container img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #1a1a1a;
+      color: #ffffff; /* White text color */
+    }
+  </style>
+</head>
+
+<body class="spacing">
+  <div class="container mx-auto p-4">
+    <nav class="flex justify-between items-center py-4">
+      <div class="flex items-center">
+        <div class="icon-container">
+          <img src="https://th.bing.com/th/id/OIP.zyO1VrIcSIu0JMUxuOVxlQHaGK?w=215&h=180&c=7&r=0&o=5&pid=1.7" alt="Galaxy Icon">
+        </div>
+        <div class="text-2xl font-bold text-white">Galaxy</div>
+      </div>
+      <div class="space-x-4 text-lg">
+        <a href="https://discord.gg/Pbp5VswzmW" class="nav-button hover:text-gray-400"><i class="fab fa-discord"></i></a>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="text-content w-full lg:w-1/2">
+        <h1 class="text-4xl font-bold mb-4 text-white">Galaxy for <span class="text-white">Roblox</span></h1>
+        <h2 class="text-3xl mb-4 text-white">Bypass with <span class="text-white">power        </h2>
+        <p class="text-lg mb-6">Experience the ultimate cheating tool for Roblox. Our dedicated developers ensure constant updates and superior performance.</p>
+        <div class="flex space-x-4">
+          <a href="https://discord.gg/Pbp5VswzmW" class="main-button">Get Galaxy Now!</a>
+          <button onclick="scrollToSection('faq')" class="main-button">Learn More</button>
+        </div>
+      </div>
+      <div class="image-container">
+        <img src="https://media.discordapp.net/attachments/1250304546761347164/1270833558608416848/image.png?ex=66b5237b&is=66b3d1fb&hm=301a4f86f2f21e88997ec3b5375a3974515c36803ff43ab0259c49fabc1a7ce9&=&format=webp&quality=lossless&width=449&height=240" alt="Galaxy Screenshot">
+      </div>
+    </div>
+
+    <section id="faq" class="faq-section py-16">
+      <h2 class="text-3xl font-bold mb-8 text-center text-white">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        <div class="p-4 rounded-lg bg-[#1a1a1a]">
+          <button class="faq-button w-full text-left focus:outline-none" onclick="toggleFaq(this)">
+            What is Galaxy?
+            <span class="emoji">⌄</span>
+          </button>
+          <div class="faq-content">
+            <p>Galaxy is a powerful and user-friendly Roblox exploit tool, designed to provide unparalleled script injection capabilities.</p>
+          </div>
+        </div>
+        <div class="p-4 rounded-lg bg-[#1a1a1a]">
+          <button class="faq-button w-full text-left focus:outline-none" onclick="toggleFaq(this)">
+            How do I get started with Galaxy?
+            <span class="emoji">⌄</span>
+          </button>
+          <div class="faq-content">
+            <p>Simply download Galaxy from our official website and follow the installation instructions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features-section py-16">
+      <h2 class="text-3xl font-bold mb-8 text-center text-white">Features</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-white">Advanced Scripting</h3>
+          <p>Inject and execute scripts with unparalleled ease and precision.</p>
+        </div>
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-white">Regular Updates</h3>
+          <p>Our team ensures that Galaxy is always up-to-date with the latest Roblox patches.</p>
+        </div>
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-white">User-Friendly Interface</h3>
+          <p>Navigating through Galaxy's features is simple and intuitive.</p>
+        </div>
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-white">High Performance</h3>
+          <p>Experience lightning-fast script execution and bypassing.</p>
+        </div>
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-white">Customizable Settings</h3>
+          <p>Tailor Galaxy to fit your specific needs and preferences.</p>
+        </div>
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-white">Dedicated Support</h3>
+          <p>Our support team is always ready to assist you with any issues.</p>
+        </div>
+      </div>
+    </section>
+
+    <div id="stars-container" class="absolute inset-0 -z-10"></div>
+
+    <footer class="footer">
+      © 2024 GALAXY. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    function createStars() {
+      const starsContainer = document.getElementById('stars-container');
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 50}s`;
+        starsContainer.appendChild(star);
+      }
+    }
+
+    function toggleFaq(button) {
+      const content = button.nextElementSibling;
+      const emoji = button.querySelector('.emoji');
+      content.classList.toggle('open');
+      emoji.classList.toggle('open');
+      if (content.classList.contains('open')) {
+        emoji.textContent = '⌃';
+      } else {
+        emoji.textContent = '⌄';
+      }
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    createStars();
+  </script>
+</body>
+
+</html>
